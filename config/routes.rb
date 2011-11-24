@@ -1,4 +1,11 @@
 FeaturePresentation::Application.routes.draw do
+  resources :features,          :only => [:new, :create, :edit, :update]
+  resources :authentifications, :only => [:new, :create, :destroy]
+  
+  root           :to => 'pages#home'
+  match '/home', :to => 'pages#home'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

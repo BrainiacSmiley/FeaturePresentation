@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>FeaturePresentation</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title><%= title %></title>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/stylesheets' %>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="span-24">
+        <%= render 'layouts/header' %>
+      </div>
+      <!-- Feature Nav -->
+      <div class="span-6">
+        <section class="round">
+          The Feature List
+        </section>
+      </div>
+      <!-- Main -->
+      <div class="span-18">
+        <section class="round">
+          <% flash.each do |key, value| %>
+            <%= content_tag(:div, value, :class => "flash #{key}") %>
+          <% end %>
+          <%= yield %>
+        </section>
+      </div>
+      <!-- Footer -->
+      <div class="span-24">
+        <%= render 'layouts/footer' %>
+      </div>
+    </div>
+  </body>
 </html>
+

@@ -1,5 +1,13 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  title:                         "Feature Presentation"
+  title_feature_new:             "New Feature"
+  title_feature_edit:            "Feature Edit"
+  title_login:                   "Login"
+  link_login:                    "Admin"
+  link_logout:                   "Logout"
+  button_feature_new:            "Create Feature"
+  button_feature_update:         "Feature update"
+  button_login:                  "Login"
+  feature_example:               "Feature Code"
+  feature_description:           "Feature Beschreibung"
+  flash_feature_created_success: "Feature successful created"

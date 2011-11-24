@@ -1,0 +1,7 @@
+<h1><%= t(:title_feature_edit) %> </h1>
+<%= form_for(@feature) do |f| %>
+  <%= render 'fields', :f => f %>
+  <div class="actions">
+    <%= f.submit t(:button_feature_update) %>
+  </div>
+<% end %>

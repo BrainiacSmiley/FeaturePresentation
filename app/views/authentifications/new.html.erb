@@ -1,0 +1,15 @@
+<h1><%= t(:title_login) %></h1>
+
+<%= form_for(:authentification, :url => authentifications_path) do |f| %>
+  <div class="field">
+    <%= f.label :login, t(:login) %><br />
+    <%= f.text_field :login %>
+  </div>
+  <div class="field">
+    <%= f.label :password, t(:password) %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="actions">
+    <%= f.submit t(:button_login) %>
+  </div>
+<% end %>
