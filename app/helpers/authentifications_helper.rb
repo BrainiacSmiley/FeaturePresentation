@@ -1,13 +1,13 @@
 module AuthentificationsHelper
-  def log_in
-    cookies.permanent.signed[:remember_token] = [Time.now]
+  def sign_in
+    session[:sign_in] = Time.now
   end
 
-  def log_out
-    cookies.delete(:remember_token)
+  def sign_out
+    session[:sign_in] = nil
   end
 
-  def loged_in?
-    !cookies.signed[:remember_token].nil?
+  def signed_in?
+    !session[:sign_in].nil?
   end
 end

@@ -5,12 +5,18 @@ de:
   title_login:                   "Anmelden"
   link_login:                    "Adminbereich"
   link_logout:                   "Ausloggen"
+  link_feature_edit:             "ändern"
+  link_feature_delete:           "löschen"
+  link_feature_new:              "neu"
   button_feature_new:            "Feature erstellen"
   button_feature_update:         "Feature ändern"
   button_login:                  "Anmelden"
   feature_example:               "Feature Code"
   feature_description:           "Feature Description"
   flash_feature_created_success: "Feature erfolgreich erstellt"
+  flash_feature_deleted_success: "Feature erfolgreich gelöscht"
+  flash_feature_edited_success:  "Feature erfolgreich geändert"
+  please_sign_in:                "Bitte loggen Sie sich ein"
 
   date:
     formats:

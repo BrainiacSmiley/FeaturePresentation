@@ -78,21 +78,6 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* Sign up button */
-
-a.signup_button {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  text-align: center;
-  width: 190px;
-  color: #fff;
-  background: #006400;
-  font-size: 150%;
-  font-weight: bold;
-  padding: 20px;
-}
-
 /* Round corners */
 
 .round {
@@ -106,55 +91,11 @@ a.signup_button {
 footer {
   text-align: center;
   margin-top: 10px;
-  width: 990px;
+  width: 950px;
   margin-left: auto;
   margin-right: auto;
 }
 
 footer nav {
   float: none;
-}
-
-/* Tools nav bar */
-
-.toolsbar {
-  text-align: left;
-  margin-top: 5px;
-  width: 975px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: -3px;
-  float: none;
-}
-
-/* localication nav bar */
-.localization {
-  text-align: right;
-  margin-top: -105px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: -3px;
-}
-
-/* localication admin nav bar */
-.localizationadmin {
-  text-align: right;
-  margin-top: -75px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: -3px;
-}
-
-/* localzation flags */
-.flags {
-  padding: 0px;
-}
-
-/* admin nav bar */
-.adminbar {
-  text-align: right;
-  margin-top: -105px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: -3px;
 }

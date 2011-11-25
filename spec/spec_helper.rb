@@ -100,6 +100,13 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   def test_sign_in
-    controller.log_in
+    controller.sign_in
+  end
+
+  def integration_log_in
+    visit login_path
+    fill_in :login,    :with => "admin"
+    fill_in :password, :with => "test123"
+    click_button
   end
 end

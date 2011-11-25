@@ -1,7 +1,11 @@
 <footer>
   <nav class="round">
     <ul>
-      <li><%= link_to t('link_login'), new_authentification_path %></li>
+      <% if signed_in? %>
+        <li><%= link_to t('link_logout'), '/logout' %></li>
+      <% else %>
+        <li><%= link_to t('link_login'), '/login' %></li>
+      <% end %>
     </ul>
   </nav>
 </footer>

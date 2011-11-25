@@ -1,0 +1,13 @@
+<tr>
+  <td class="round feature">
+    <%= feature.name %><br />
+    <% if signed_in? %>
+    <nav class="round feature_links">
+      <ul>
+        <li><%= link_to t(:link_feature_edit), edit_feature_path(feature) %></li>
+        <li><%= link_to t(:link_feature_delete), feature, :method => :delete, :confirm => "You sure?", :title => "Delete #{feature.name}" %></li>
+      </ul>
+    </nav>
+    <% end %>
+  </td>
+</tr>

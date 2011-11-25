@@ -54,7 +54,7 @@ describe AuthentificationsController do
       end
 
       it "should log the user in" do
-        controller.should be_loged_in
+        controller.should be_signed_in
       end
 
       it "should direct to the root_page" do
@@ -67,7 +67,7 @@ describe AuthentificationsController do
     it "should log a user out" do
       test_sign_in
       delete :destroy, :id => 1
-      controller.should_not be_loged_in
+      controller.should_not be_signed_in
       response.should redirect_to(root_path)
     end
   end
