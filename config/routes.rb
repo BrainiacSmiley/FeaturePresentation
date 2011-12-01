@@ -1,6 +1,8 @@
 FeaturePresentation::Application.routes.draw do
-  resources :features,          :only => [:new, :create, :edit, :update, :destroy]
-  resources :authentifications, :only => [:new, :create, :destroy]
+
+  resources :features,             :only => [:new, :create, :edit, :update, :destroy, :show]
+  resources :feature_descriptions, :only => [:new, :create, :edit, :update, :destroy, :show]
+  resources :authentifications,    :only => [:new, :create, :destroy]
   
   root             :to => 'pages#home'
   match '/home',   :to => 'pages#home'

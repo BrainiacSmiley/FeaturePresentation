@@ -1,7 +1,7 @@
 class AuthentificationsController < ApplicationController
   def new
     @title = t(:title_login)
-    @features = Feature.all
+    @feature_descriptions = FeatureDescription.all
   end
 
   def create
@@ -11,7 +11,7 @@ class AuthentificationsController < ApplicationController
     if (params[:authentification][:login] != login_needed && params[:authentification][:password] != password_needed)
       flash.now[:error] = t(:login_failure)
       @title = t(:title_login)
-      @features = Feature.all
+      @feature_descriptions = FeatureDescription.all
       render 'new'
     else
       sign_in

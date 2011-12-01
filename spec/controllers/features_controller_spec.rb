@@ -20,6 +20,8 @@ describe FeaturesController do
       describe "as loged in" do
         before(:each) do
           test_sign_in
+          @feature_description = Factory(:feature_description)
+          test_set_current_feature_description(@feature_description.id)
           get :new
         end
 
@@ -64,6 +66,8 @@ describe FeaturesController do
       describe "as loged in" do
         before(:each) do
           test_sign_in
+          @feature_description = Factory(:feature_description)
+          test_set_current_feature_description(@feature_description.id)
         end
         
         describe "failure" do
@@ -107,9 +111,9 @@ describe FeaturesController do
             end.should change(Feature, :count).by(1)
           end
 
-          it "should redirect to the root_page" do
+          it "should redirect to the show page" do
             post :create, :feature => @attr
-            response.should redirect_to(root_path)
+            response.should redirect_to feature_description_path(@feature_description)
           end
 
           it "should have a flash[:success] message" do
@@ -130,8 +134,10 @@ describe FeaturesController do
 
       describe "as loged in" do
         before(:each) do
-          @feature = Factory(:feature)
           test_sign_in
+          @feature_description = Factory(:feature_description)
+          @feature = Factory(:feature, :feature_description => @feature_description)
+          test_set_current_feature_description(@feature_description.id)
           get :edit, :id => @feature
         end
 
@@ -147,7 +153,9 @@ describe FeaturesController do
 
     describe "PUT 'update'" do
       before(:each) do
-        @feature = Factory(:feature)
+        @feature_description = Factory(:feature_description)
+        @feature = Factory(:feature, :feature_description => @feature_description)
+        test_set_current_feature_description(@feature_description.id)
       end
 
       describe "as non loged in" do
@@ -206,8 +214,8 @@ describe FeaturesController do
             @feature.description.should == @attr[:description]
           end
 
-          it "should redirect to /home" do
-            response.should redirect_to root_path
+          it "should redirect to the feature_description show page" do
+            response.should redirect_to feature_description_path(@feature_description)
           end
 
           it "should have a flash[:success] message" do
@@ -219,7 +227,9 @@ describe FeaturesController do
 
     describe "DELETE 'destroy'" do
       before(:each) do
-        @feature = Factory(:feature)
+        @feature_description = Factory(:feature_description)
+        @feature = Factory(:feature, :feature_description => @feature_description)
+        test_set_current_feature_description(@feature_description.id)
       end
       
       describe "as non loged in" do
@@ -237,15 +247,15 @@ describe FeaturesController do
           test_sign_in
         end
 
-        it "should delte the feature" do
+        it "should delete the feature" do
           lambda do
             delete :destroy, :id => @feature
           end.should change(Feature, :count).by(-1)
         end
 
-        it "should redirect to home" do
+        it "should redirect to feature_description show page" do
           delete :destroy, :id => @feature
-          response.should redirect_to root_path
+          response.should redirect_to feature_description_path(@feature_description)
         end
       end
     end

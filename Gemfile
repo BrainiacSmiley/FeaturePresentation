@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -34,14 +34,17 @@ gem 'will_paginate'
 group :test do
   # Pretty printed test output
   gem 'turn', '~> 0.8.3', :require => false
-  gem 'rspec-rails', '2.6.1'
-  gem 'webrat', '0.7.1'
-  gem 'spork', '0.9.0.rc5'
-  gem 'factory_girl_rails', '1.0'
+  gem 'rspec-rails'
+  gem 'webrat'
+  gem 'spork'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'database_cleaner'
+  gem 'capybara-webkit'
 end
 
 group :development do
-  gem 'rspec-rails', '2.6.1'
-  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
-  gem 'faker', '0.3.1'
+  gem 'rspec-rails'
+  gem 'annotate'
+  gem 'faker'
 end

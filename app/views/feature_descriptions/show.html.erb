@@ -1,0 +1,75 @@
+<h1><%= @feature_description.name %></h1>
+
+<% if signed_in? %>
+  <%= link_to t(:link_feature_new), new_feature_path %>
+<% end %>
+<div class="feature_navigation">
+  <nav class="round">
+    <ul>
+    </ul>
+  </nav>
+</div>
+<table>
+  <tr>
+    <td><button onClick="featureBrowsing(-1);"><</button></td>
+    <td valign="center" align="center"><%= render @features %></td>
+    <td><button onClick="featureBrowsing(1);">></button></td>
+  </tr>
+</table>
+
+<script type="text/javascript" src="http://www.netcu.de/templates/netcu/js/jquery.touchwipe.min.js"></script>
+<script>
+  var $all_features;
+  var $all_features_navigation;
+
+  Number.prototype.mod = function(n) {
+    return ((this%n)+n)%n;
+  }
+
+  //function for toggle
+  function toggleFeature(id) {
+    for (var x = 0; x < $all_features.length; x++) {
+      if (x != id)
+        $($all_features[x]).hide();
+    }
+    $($all_features[id]).show();
+    window.location.hash = id;
+  }
+
+  //function for switching
+  function featureBrowsing(changing) {
+    var actualFeature = parseInt(window.location.hash.substr(1));
+    var newFeature = (changing+actualFeature).mod($all_features.length);
+    toggleFeature(newFeature)
+  }
+
+  $(document).ready(function(){
+    //checking the div blocks
+    $all_features = $('div.feature_block');
+    $all_features_navigation = $('div.feature_navigation ul');
+
+    //filling the navigation
+    var navList = [];
+    for (var x = 0; x < $all_features.length; x++) {
+      var zaehler = x+1;
+      navList.push('<li><button onClick="toggleFeature('+x+');">' + zaehler + '</button></li>');
+    }
+    $all_features_navigation.append(navList.join(''));
+
+    //hiding the content
+    $all_features.hide();
+    var startFeature;
+    if (window.location.hash == "")
+      startFeature = 0;
+    else
+      startFeature = window.location.hash.substr(1)
+    toggleFeature(startFeature);
+
+    //adding the gestures
+    $('body').touchwipe({
+      wipeLeft: function(){ featureBrowsing(-1) },
+      wipeRight: function(){ featureBrowsing(1) }
+    })
+
+  });
+</script>

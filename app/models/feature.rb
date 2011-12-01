@@ -13,7 +13,10 @@
 class Feature < ActiveRecord::Base
   attr_accessible :name, :example, :description
 
-  validates :name,        :presence => true
-  validates :example,     :presence => true
-  validates :description, :presence => true
+  belongs_to :feature_description
+
+  validates :name,                   :presence => true
+  validates :example,                :presence => true
+  validates :description,            :presence => true
+  validates :feature_description_id, :presence => true
 end

@@ -3,35 +3,38 @@ class FeaturesController < ApplicationController
 
   def new
     @title = t(:title_feature_new)
-    @feature = Feature.new
-    @features = Feature.all
+    @feature = current_feature_description.features.new
+    @feature_descriptions = FeatureDescription.all
   end
 
   def create
-    @feature = Feature.new(params[:feature])
+    @feature = current_feature_description.features.create(params[:feature])
+    @feature_description = current_feature_description
     if @feature.save
       flash[:success] = t(:flash_feature_created_success)
-      redirect_to root_path
+      redirect_to feature_description_path(@feature_description)
     else
       @title = t(:title_feature_new)
-      @features = Feature.all
+      @feature_descriptions = FeatureDescription.all
       render 'new'
     end
   end
 
   def edit
-    @feature = Feature.find_by_id(params[:id])
+    @feature = current_feature_description.features.find_by_id(params[:id])
+    @feature_description = current_feature_description
     @title = t(:title_feature_edit)
-    @features = Feature.all
+    @feature_descriptions = FeatureDescription.all
   end
 
   def update
-    @feature = Feature.find_by_id(params[:id])
-    @features = Feature.all
+    @feature = current_feature_description.features.find_by_id(params[:id])
+    @feature_description = current_feature_description
+    @feature_descriptions = FeatureDescription.all
     if @feature.update_attributes(params[:feature])
       @title = t(:title)
       flash[:success] = t(:flash_feature_edited_success)
-      redirect_to root_path
+      redirect_to feature_description_path(@feature_description)
     else
       @title = t(:title_feature_edit)
       render 'edit'
@@ -39,20 +42,12 @@ class FeaturesController < ApplicationController
   end
 
   def destroy
-    @features = Feature.all
+    feature_to_destroy = current_feature_description.features.find_by_id(params[:id])
+    @feature_description = current_feature_description
+    @feature_descriptions = FeatureDescription.all
     @title = t(:title)
-    feature_to_destroy = Feature.find_by_id(params[:id])
     feature_to_destroy.destroy
     flash[:success] = t(:flash_feature_deleted_success)
-    redirect_to root_path
+    redirect_to feature_description_path(@feature_description)
   end
-
-  private
-    def authenticate
-      deny_access unless signed_in?
-    end
-
-    def deny_access
-      redirect_to login_path, :notice => t(:please_sin_in)
-    end
 end

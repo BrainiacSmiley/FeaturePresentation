@@ -18,19 +18,31 @@ describe PagesController do
          response.should have_selector('title', :content => I18n.t(:title))
       end
 
-      describe "Feature List" do
+      describe "Feature Description List" do
         before(:each) do
-          feature = Factory(:feature)
-          second = Factory(:feature, :name => "Feature 2")
-          third = Factory(:feature, :name => "Feature 3")
+          feature = Factory(:feature_description)
+          second = Factory(:feature_description, :name => "Feature Description 2")
+          third = Factory(:feature_description, :name => "Feature Description 3")
 
-          @features = [feature, second, third]
+          @feature_descriptions = [feature, second, third]
+          get :home
         end
 
-        it "should contain an entry for every feature" do
-          get :home
-          @features.each do |feature|
-            response.should have_selector('td', :content => feature.name)
+        it "should contain an entry for every feature description" do
+          @feature_descriptions.each do |feature_description|
+            response.should have_selector(
+              'td',
+              :content => feature_description.name
+            )
+          end
+        end
+
+        it "should contain a link to the feature description show page for every entry" do
+          @feature_descriptions.each do |feature_description|
+            response.should have_selector(
+              'a',
+              :href => feature_description_path(feature_description)
+            )
           end
         end
 
@@ -40,19 +52,31 @@ describe PagesController do
           end
           
           it "should not contain a edit link for every feature" do
-            @features.each do |feature|
-              response.should_not have_selector('a', :href => edit_feature_path(feature), :content => I18n.t(:link_feature_edit))
+            @feature_descriptions.each do |feature_description|
+              response.should_not have_selector(
+                'a',
+                :href => edit_feature_description_path(feature_description),
+                :content => I18n.t(:link_feature_description_edit)
+              )
             end
           end
 
           it "should not contain a delete link" do
-            @features.each do |feature|
-              response.should_not have_selector('a', :href => feature_path(feature), :content => I18n.t(:link_feature_delete))
+            @feature_descriptions.each do |feature_description|
+              response.should_not have_selector(
+                'a',
+                :href => feature_description_path(feature_description),
+                :content => I18n.t(:link_feature_description_delete)
+              )
             end
           end
 
           it "should not contain a add new feature link" do
-            response.should_not have_selector('a', :href => new_feature_path, :content => I18n.t(:link_feature_new))
+            response.should_not have_selector(
+              'a',
+              :href => new_feature_description_path,
+              :content => I18n.t(:link_feature_description_new)
+            )
           end
         end
 
@@ -63,19 +87,30 @@ describe PagesController do
           end
 
           it "should contain a edit link for every feature" do
-            @features.each do |feature|
-              response.should have_selector('a', :href => edit_feature_path(feature), :content => I18n.t(:link_feature_edit))
+            @feature_descriptions.each do |feature_description|
+              response.should have_selector(
+                'a',
+                :href => edit_feature_description_path(feature_description),
+                :content => I18n.t(:link_feature_description_edit)
+              )
             end
           end
 
           it "should contain a delete link" do
-            @features.each do |feature|
-              response.should have_selector('a', :href => feature_path(feature), :content => I18n.t(:link_feature_delete))
+            @feature_descriptions.each do |feature_description|
+              response.should have_selector('a',
+                :href => feature_description_path(feature_description),
+                :content => I18n.t(:link_feature_description_delete)
+              )
             end
           end
 
           it "should contain a add new feature link" do
-            response.should have_selector('a', :href => new_feature_path, :content => I18n.t(:link_feature_new))
+            response.should have_selector(
+              'a',
+              :href => new_feature_description_path,
+              :content => I18n.t(:link_feature_description_new)
+            )
           end
         end
       end

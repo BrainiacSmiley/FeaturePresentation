@@ -1,5 +1,9 @@
 class PagesController < ApplicationController
   def home
-    @features = Feature.all
+    @feature_descriptions = FeatureDescription.all
+  end
+
+  def test
+    @feature_descriptions = FeatureDescription.all
   end
 end

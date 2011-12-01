@@ -4,21 +4,19 @@
     <title><%= title %></title>
     <%= csrf_meta_tags %>
     <%= render 'layouts/stylesheets' %>
+    <%= render 'layouts/ipad' %>
   </head>
   <body>
     <div class="container">
-      <!-- Header -->
-      <div class="span-24">
+      <div class="span-28 last" id="header">
         <%= render 'layouts/header' %>
       </div>
-      <!-- Feature Nav -->
-      <div class="span-6">
+      <div class="span-6" id="feature_nav_list">
         <section class="round">
-          <%= render 'features/features' %>
+          <%= render 'feature_descriptions/feature_descriptions' %>
         </section>
       </div>
-      <!-- Main -->
-      <div class="span-18">
+      <div class="span-22 last" id="main_content">
         <section class="round">
           <% flash.each do |key, value| %>
             <%= content_tag(:div, value, :class => "flash #{key}") %>
@@ -26,8 +24,7 @@
           <%= yield %>
         </section>
       </div>
-      <!-- Footer -->
-      <div class="span-24">
+      <div class="span-28 last" id="footer">
         <%= render 'layouts/footer' %>
       </div>
     </div>
