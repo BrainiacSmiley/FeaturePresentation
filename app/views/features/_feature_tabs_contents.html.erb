@@ -1,0 +1,23 @@
+<% contents.each_with_index do |content, index| %>
+  <% if index == 0 %>
+    <div class="active tab-pane" id="<%= content.id %>">
+  <% else %>
+    <div class="tab-pane" id="<%= content.id %>">
+  <% end %>
+    <h1><%= content.name %></h1>
+
+    <div class="round example"><%= raw content.example %></div>
+
+    <h3><%= t(:feature_description) %></h3>
+    <div class="round description">
+      <%= raw content.description %>
+    </div>
+    &nbsp;
+    <% if signed_in? %>
+      <div class="administration">
+        <button class="btn"><%= link_to t(:link_feature_edit), edit_feature_path(content) %></button>
+        <button class="btn"><%= link_to t(:link_feature_delete), content, :method => :delete, :confirm => t(:delete_question), :title => "Delete #{content.name}" %></button>
+      </div>
+    <% end %>
+  </div>
+<% end %>

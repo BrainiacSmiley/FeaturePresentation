@@ -1,7 +1,8 @@
 <h1><%= t(:title_feature_description_edit) %> </h1>
 <%= form_for(@feature_description) do |f| %>
   <%= render 'fields', :f => f %>
-  <div class="actions">
-    <%= f.submit t(:button_feature_description_update) %>
+  <div class="actions round">
+    <%= f.submit t(:button_feature_description_update), :class => "btn primary" %>
+    <button type="reset" class="btn"><%= t(:button_cancel)%></button>
   </div>
 <% end %>

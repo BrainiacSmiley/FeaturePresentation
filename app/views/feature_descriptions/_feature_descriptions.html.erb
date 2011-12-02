@@ -1,11 +1,9 @@
 <h1><%= t(:title_feature_description_list)%></h1>
 <% if signed_in? %>
-<nav class="round">
-  <ul>
-    <li><%= link_to t(:link_feature_description_new), new_feature_description_path %></li>
-  </ul>
-</nav>
+  <div class="administration">
+    <button class="btn"><%= link_to t(:link_feature_description_new), new_feature_description_path %></button>
+  </div>
 <% end %>
-<table>
+<table class="zebra-striped">
   <%= render @feature_descriptions %>
 </table>

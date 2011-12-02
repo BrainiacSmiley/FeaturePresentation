@@ -1,23 +1,20 @@
 <h1><%= @feature_description.name %></h1>
 
 <% if signed_in? %>
-  <%= link_to t(:link_feature_new), new_feature_path %>
+  <div class="administration">
+    <button class="btn"><%= link_to t(:link_feature_new), new_feature_path %></button>
+  </div>
 <% end %>
-<div class="feature_navigation">
-  <nav class="round">
-    <ul>
-    </ul>
-  </nav>
-</div>
-<table>
-  <tr>
-    <td><button onClick="featureBrowsing(-1);"><</button></td>
-    <td valign="center" align="center"><%= render @features %></td>
-    <td><button onClick="featureBrowsing(1);">></button></td>
-  </tr>
-</table>
 
-<script type="text/javascript" src="http://www.netcu.de/templates/netcu/js/jquery.touchwipe.min.js"></script>
+<ul class="tabs" data-tabs="tabs">
+  <%= render 'features/feature_tabs', :tabs => @features %>
+</ul>
+ <div id="my-tab-content" class="tab-content">
+   <%= render 'features/feature_tabs_contents', :contents => @features  %>
+ </div>
+
+<%= javascript_include_tag 'bootstrap/bootstrap-tabs' %>
+<%= javascript_include_tag 'jquery.touchwipe.1.1.1' %>
 <script>
   var $all_features;
   var $all_features_navigation;
@@ -43,8 +40,21 @@
     toggleFeature(newFeature)
   }
 
-  $(document).ready(function(){
-    //checking the div blocks
+  $(document).ready(function() {
+    $(function () {
+      $('.tabs').tabs()
+    })
+
+    //adding the gestures
+    $('body').touchwipe({
+      wipeLeft: function(){ featureBrowsing(-1) },
+      wipeRight: function(){ featureBrowsing(1) }
+    })
+  });
+</script>
+
+
+<!--    //checking the div blocks
     $all_features = $('div.feature_block');
     $all_features_navigation = $('div.feature_navigation ul');
 
@@ -57,19 +67,11 @@
     $all_features_navigation.append(navList.join(''));
 
     //hiding the content
-    $all_features.hide();
+    //$all_features.hide();
     var startFeature;
     if (window.location.hash == "")
       startFeature = 0;
     else
       startFeature = window.location.hash.substr(1)
-    toggleFeature(startFeature);
-
-    //adding the gestures
-    $('body').touchwipe({
-      wipeLeft: function(){ featureBrowsing(-1) },
-      wipeRight: function(){ featureBrowsing(1) }
-    })
-
-  });
-</script>
+    //toggleFeature(startFeature);
+-->
