@@ -16,7 +16,7 @@
       <div class="content" id="feature_content">
         <div class="section round">
           <% flash.each do |key, value| %>
-            <%= content_tag(:div, value, :class => "flash #{key}") %>
+            <%= content_tag(:div, value, :class => "alert-message #{key}") %>
           <% end %>
           <%= yield %>
         </div>
