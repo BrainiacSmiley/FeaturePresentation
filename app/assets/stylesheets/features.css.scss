@@ -40,18 +40,18 @@
   border-style: solid;
   border-width: 0 0 1px;
   background-color: #ddd;
-  -moz-border-radius:    10px;
-  -webkit-border-radius: 10px;
-  border-radius:         10px;
+  -moz-border-radius:    5px;
+  -webkit-border-radius: 5px;
+  border-radius:         5px;
 }
 
 .tabs > li > a:hover {
   text-decoration: none;
   background-color: #eee;
   border-color: #eee #eee #ddd;
-  -moz-border-radius:    10px;
-  -webkit-border-radius: 10px;
-  border-radius:         10px;
+  -moz-border-radius:    5px;
+  -webkit-border-radius: 5px;
+  border-radius:         5px;
 }
 
 .tabs .active > a, .tabs .active > a:hover {
@@ -60,9 +60,9 @@
   border: 1px solid #ddd;
   border-bottom-color: transparent;
   cursor: default;
-  -moz-border-radius:    10px;
-  -webkit-border-radius: 10px;
-  border-radius:         10px;
+  -moz-border-radius:    5px;
+  -webkit-border-radius: 5px;
+  border-radius:         5px;
 }
 
 table td {
