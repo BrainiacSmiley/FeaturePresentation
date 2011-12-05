@@ -9,41 +9,82 @@
 <ul class="tabs" data-tabs="tabs">
   <%= render 'features/feature_tabs', :tabs => @features %>
 </ul>
- <div id="my-tab-content" class="tab-content">
-   <%= render 'features/feature_tabs_contents', :contents => @features  %>
- </div>
+
+<div id="my-tab-content" class="tab-content">
+  <%= render 'features/feature_tabs_contents', :contents => @features  %>
+</div>
 
 <%= javascript_include_tag 'bootstrap/bootstrap-tabs' %>
 <%= javascript_include_tag 'jquery.touchwipe.1.1.1' %>
 <script>
-  var $all_features;
-  var $all_features_navigation;
+  var $allTabs
+  var $activeTab
+  var $allNavTabs
+  var activeTabIndex
 
   Number.prototype.mod = function(n) {
     return ((this%n)+n)%n;
   }
 
-  //function for toggle
-  function toggleFeature(id) {
-    for (var x = 0; x < $all_features.length; x++) {
-      if (x != id)
-        $($all_features[x]).hide();
-    }
-    $($all_features[id]).show();
-    window.location.hash = id;
-  }
-
   //function for switching
   function featureBrowsing(changing) {
-    var actualFeature = parseInt(window.location.hash.substr(1));
-    var newFeature = (changing+actualFeature).mod($all_features.length);
-    toggleFeature(newFeature)
+    //new Index
+    var newTabIndex = (changing+activeTabIndex).mod($allTabs.length)
+
+    //remove old active state
+    removeActive(activeTabIndex)
+    //add new active state
+    addActive(newTabIndex)
+    //filling url hash
+    setURLHash(newTabIndex)
+    getValues()
+  }
+
+  function restoreTabFromHash() {
+    var actualHash = window.location.hash
+    if (actualHash != "") {
+      var hashIndex = parseInt(actualHash.substr(1))
+      if (activeTabIndex != hashIndex) {
+        removeActive(activeTabIndex)
+        addActive(hashIndex)
+      }
+    }
+  }
+
+  function removeActive(index) {
+    $($allTabs[index]).removeClass('active')
+    $($allNavTabs[index]).removeClass('active')
+  }
+
+  function addActive(index) {
+    $($allTabs[index]).addClass('active')
+    $($allNavTabs[index]).addClass('active')
+  }
+
+  function setURLHash(index) {
+    window.location.hash = index
+  }
+
+  //calculation of actual values
+  function getValues() {
+    $allTabs = $('.tab-pane')
+    $activeTab = $('.active.tab-pane')
+    $allNavTabs = $('ul.tabs li')
+    //actual Index
+    activeTabIndex = $allTabs.index($activeTab);
   }
 
   $(document).ready(function() {
     $(function () {
       $('.tabs').tabs()
+      $('.tabs').bind('change', function (e) {
+        getValues()
+        setURLHash(activeTabIndex)
+      })
     })
+
+    getValues()
+    restoreTabFromHash()
 
     //adding the gestures
     $('body').touchwipe({
