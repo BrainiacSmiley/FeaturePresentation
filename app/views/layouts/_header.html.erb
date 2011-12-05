@@ -4,9 +4,9 @@
       <%= link_to t(:title), root_path , :class => "brand" %>
       <p class="pull-right">
         <% if signed_in? %>
-          <%= link_to t('link_logout'), '/logout' %>
+          <%= link_to t('link_logout'), '/logout', :style => "color: white;" %>
         <% else %>
-          <%= link_to t('link_login'), '/login' %>
+          <%= link_to t('link_login'), '/login', :style => "color: white;" %>
         <% end %>
       </p>
     </div>
