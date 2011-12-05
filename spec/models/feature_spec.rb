@@ -51,11 +51,6 @@ describe Feature do
       .should_not be_valid
     end
 
-    it "should require an examlpe" do
-      @feature_description.features.build(@attr.merge(:example => ""))
-      .should_not be_valid
-    end
-
     it "should require a description" do
       @feature_description.features.build(@attr.merge(:description => ""))
       .should_not be_valid

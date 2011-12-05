@@ -1,6 +1,6 @@
 <h1><%= @feature_description.name %></h1>
 
-<% unless @feature_description.description.nil? %>
+<% unless @feature_description.description.empty? %>
 <h3>Erklärung</h3>
 <% if @feature_description.description.length > 120 %>
   <div class="textbox">

@@ -16,7 +16,6 @@ class Feature < ActiveRecord::Base
   belongs_to :feature_description
 
   validates :name,                   :presence => true
-  validates :example,                :presence => true
   validates :description,            :presence => true
   validates :feature_description_id, :presence => true
 end

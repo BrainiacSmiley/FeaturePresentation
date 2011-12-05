@@ -10,7 +10,9 @@
       <button class="btn" style="float: right;" onClick="featureBrowsing(1);">></button>
     </div>
 
+    <% unless content.example.empty? %>
     <div class="round example"><%= raw content.example %></div>
+    <% end %>
 
     <h3><%= t(:feature_description) %></h3>
     <div class="round description">
