@@ -1,5 +1,25 @@
 <h1><%= @feature_description.name %></h1>
 
+<% unless @feature_description.description.nil? %>
+<h3>Erklärung</h3>
+<% if @feature_description.description.length > 120 %>
+  <div class="textbox">
+    <div class="description round">
+      <%= @feature_description.description[0..120] %>
+      <div class="box">
+         <%= @feature_description.description[120..@feature_description.description.length] %>
+      </div>
+      <div class="clickable">...&gt;&gt;</div>
+    </div>
+  </div>
+<% else %>
+  <div class="description round">
+    <%= @feature_description.description %>
+  </div>
+<% end %>
+<p>&nbsp;</p>
+<% end %>
+
 <% if signed_in? %>
   <div class="administration">
     <button class="btn"><%= link_to t(:link_feature_new), new_feature_path %></button>
@@ -86,6 +106,17 @@
     getValues()
     restoreTabFromHash()
 
+    //toggle possibility for feature_description.description
+    $(".clickable").click(function() {
+      $(this).siblings(".box").slideToggle('slow');
+      if($(this).html()=="...&gt;&gt;") {
+        $(this).html("&lt;&lt;");
+      } else {
+        $(this).html("...&gt;&gt;");
+      }
+    });
+    $(".clickable").siblings(".box").hide()
+
     //adding the gestures
     $('body').touchwipe({
       wipeLeft: function(){ featureBrowsing(-1) },
@@ -93,26 +124,3 @@
     })
   });
 </script>
-
-
-<!--    //checking the div blocks
-    $all_features = $('div.feature_block');
-    $all_features_navigation = $('div.feature_navigation ul');
-
-    //filling the navigation
-    var navList = [];
-    for (var x = 0; x < $all_features.length; x++) {
-      var zaehler = x+1;
-      navList.push('<li><button onClick="toggleFeature('+x+');">' + zaehler + '</button></li>');
-    }
-    $all_features_navigation.append(navList.join(''));
-
-    //hiding the content
-    //$all_features.hide();
-    var startFeature;
-    if (window.location.hash == "")
-      startFeature = 0;
-    else
-      startFeature = window.location.hash.substr(1)
-    //toggleFeature(startFeature);
--->
