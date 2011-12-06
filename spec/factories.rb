@@ -1,5 +1,6 @@
 Factory.define :feature_description do |feature_description|
-  feature_description.name "New Feature Description"
+  feature_description.name        "New Feature Description"
+  feature_description.description "New Description for FeatureDescription"
 end
 
 Factory.define :feature do |feature|

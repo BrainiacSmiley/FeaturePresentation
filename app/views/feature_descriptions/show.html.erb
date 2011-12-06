@@ -1,75 +1,126 @@
 <h1><%= @feature_description.name %></h1>
 
-<% if signed_in? %>
-  <%= link_to t(:link_feature_new), new_feature_path %>
+<% unless @feature_description.description.empty? %>
+<h3>Erklärung</h3>
+<% if @feature_description.description.length > 120 %>
+  <div class="textbox">
+    <div class="description round">
+      <%= @feature_description.description[0..120] %>
+      <div class="box">
+         <%= @feature_description.description[120..@feature_description.description.length] %>
+      </div>
+      <div class="clickable">...&gt;&gt;</div>
+    </div>
+  </div>
+<% else %>
+  <div class="description round">
+    <%= @feature_description.description %>
+  </div>
 <% end %>
-<div class="feature_navigation">
-  <nav class="round">
-    <ul>
-    </ul>
-  </nav>
-</div>
-<table>
-  <tr>
-    <td><button onClick="featureBrowsing(-1);"><</button></td>
-    <td valign="center" align="center"><%= render @features %></td>
-    <td><button onClick="featureBrowsing(1);">></button></td>
-  </tr>
-</table>
+<p>&nbsp;</p>
+<% end %>
 
-<script type="text/javascript" src="http://www.netcu.de/templates/netcu/js/jquery.touchwipe.min.js"></script>
+<% if signed_in? %>
+  <div class="administration">
+    <button class="btn"><%= link_to t(:link_feature_new), new_feature_path %></button>
+  </div>
+<% end %>
+
+<ul class="tabs" data-tabs="tabs">
+  <%= render 'features/feature_tabs', :tabs => @features %>
+</ul>
+
+<div id="my-tab-content" class="tab-content">
+  <%= render 'features/feature_tabs_contents', :contents => @features  %>
+</div>
+
+<%= javascript_include_tag 'bootstrap/bootstrap-tabs' %>
+<%= javascript_include_tag 'jquery.touchwipe.1.1.1' %>
 <script>
-  var $all_features;
-  var $all_features_navigation;
+  var $allTabs
+  var $activeTab
+  var $allNavTabs
+  var activeTabIndex
 
   Number.prototype.mod = function(n) {
     return ((this%n)+n)%n;
   }
 
-  //function for toggle
-  function toggleFeature(id) {
-    for (var x = 0; x < $all_features.length; x++) {
-      if (x != id)
-        $($all_features[x]).hide();
-    }
-    $($all_features[id]).show();
-    window.location.hash = id;
-  }
-
   //function for switching
   function featureBrowsing(changing) {
-    var actualFeature = parseInt(window.location.hash.substr(1));
-    var newFeature = (changing+actualFeature).mod($all_features.length);
-    toggleFeature(newFeature)
+    //new Index
+    var newTabIndex = (changing+activeTabIndex).mod($allTabs.length)
+
+    //remove old active state
+    removeActive(activeTabIndex)
+    //add new active state
+    addActive(newTabIndex)
+    //filling url hash
+    setURLHash(newTabIndex)
+    getValues()
   }
 
-  $(document).ready(function(){
-    //checking the div blocks
-    $all_features = $('div.feature_block');
-    $all_features_navigation = $('div.feature_navigation ul');
-
-    //filling the navigation
-    var navList = [];
-    for (var x = 0; x < $all_features.length; x++) {
-      var zaehler = x+1;
-      navList.push('<li><button onClick="toggleFeature('+x+');">' + zaehler + '</button></li>');
+  function restoreTabFromHash() {
+    var actualHash = window.location.hash
+    if (actualHash != "") {
+      var hashIndex = parseInt(actualHash.substr(1))
+      if (activeTabIndex != hashIndex) {
+        removeActive(activeTabIndex)
+        addActive(hashIndex)
+      }
     }
-    $all_features_navigation.append(navList.join(''));
+  }
 
-    //hiding the content
-    $all_features.hide();
-    var startFeature;
-    if (window.location.hash == "")
-      startFeature = 0;
-    else
-      startFeature = window.location.hash.substr(1)
-    toggleFeature(startFeature);
+  function removeActive(index) {
+    $($allTabs[index]).removeClass('active')
+    $($allNavTabs[index]).removeClass('active')
+  }
+
+  function addActive(index) {
+    $($allTabs[index]).addClass('active')
+    $($allNavTabs[index]).addClass('active')
+  }
+
+  function setURLHash(index) {
+    window.location.hash = index
+  }
+
+  //calculation of actual values
+  function getValues() {
+    $allTabs = $('.tab-pane')
+    $activeTab = $('.active.tab-pane')
+    $allNavTabs = $('ul.tabs li')
+    //actual Index
+    activeTabIndex = $allTabs.index($activeTab);
+  }
+
+  $(document).ready(function() {
+    $(function () {
+      $('.tabs').tabs()
+      $('.tabs').bind('change', function (e) {
+        getValues()
+        setURLHash(activeTabIndex)
+      })
+    })
+
+    getValues()
+    restoreTabFromHash()
+
+    //toggle possibility for feature_description.description
+    $(".clickable").click(function() {
+      $(this).siblings(".box").slideToggle('slow');
+      if($(this).html()=="...&gt;&gt;") {
+        $(this).html("&lt;&lt;");
+      } else {
+        $(this).html("...&gt;&gt;");
+      }
+    });
+    $(".clickable").siblings(".box").hide()
 
     //adding the gestures
     $('body').touchwipe({
       wipeLeft: function(){ featureBrowsing(-1) },
       wipeRight: function(){ featureBrowsing(1) }
     })
-
   });
 </script>

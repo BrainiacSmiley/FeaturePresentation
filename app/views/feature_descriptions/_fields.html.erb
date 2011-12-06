@@ -1,5 +1,13 @@
 <%= render 'shared/error_messages', :object => f.object %>
-<div class="field">
-  <%= f.label :name %><br />
-  <%= f.text_field :name %>
+<div class="clearfix">
+  <%= f.label :name %>
+  <div class="input">
+    <%= f.text_field :name %>
+  </div>
+</div>
+<div class="clearfix">
+  <%= f.label :description %>
+  <div class="input">
+    <%= f.text_area :description, :class => "span8" %>
+  </div>
 </div>

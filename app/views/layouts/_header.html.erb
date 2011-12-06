@@ -1,3 +1,14 @@
-<section class="round">
-  <center><h1><%= link_to t(:title), root_path %></h1></center>
-</section>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="container-fluid">
+      <%= link_to t(:title), root_path , :class => "brand" %>
+      <p class="pull-right">
+        <% if signed_in? %>
+          <%= link_to t('link_logout'), '/logout', :style => "color: white;" %>
+        <% else %>
+          <%= link_to t('link_login'), '/login', :style => "color: white;" %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>

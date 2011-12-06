@@ -19,6 +19,7 @@ de:
   button_feature_description_new:            "Feature Kategorie erstellen"
   button_feature_description_update:         "Feature Kategorie ändern"
   button_login:                              "Anmelden"
+  button_cancel:                             "Reset"
   feature_example:                           "Code-Beispiel"
   feature_description:                       "Beschreibung"
   flash_feature_created_success:             "Feature erfolgreich erstellt"
@@ -32,6 +33,9 @@ de:
   errors_with_fields:                        "Es gab Fehler in folgenden Feldern"
   error:                                     "Fehler"
   delete_question:                           "Sind sie sicher?"
+  password:                                  "Passwort"
+  login:                                     "Benutzername"
+  login_failure:                             "Falsche Benutzername/Passwort Kombination!"
 
 
   date:

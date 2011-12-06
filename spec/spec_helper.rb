@@ -123,8 +123,8 @@ RSpec.configure do |config|
 
   def integration_log_in
     visit login_path
-    fill_in :login,    :with => "admin"
-    fill_in :password, :with => "test123"
+    fill_in I18n.t(:login),    :with => "admin"
+    fill_in I18n.t(:password), :with => "test123"
     click_button
   end
 end

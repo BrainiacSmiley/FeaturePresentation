@@ -41,7 +41,8 @@ describe FeatureDescriptionsController do
       describe "as non loged in" do
         before(:each) do
           @attr = {
-            :name => ""
+            :name => "",
+            :description => ""
           }
           post :create, :feature_description => @attr
         end
@@ -59,7 +60,8 @@ describe FeatureDescriptionsController do
         describe "failure" do
           before(:each) do
             @attr = {
-              :name => ""
+              :name => "",
+              :description => ""
             }
           end
 
@@ -83,7 +85,8 @@ describe FeatureDescriptionsController do
         describe "success" do
           before(:each) do
             @attr = {
-              :name => "New FeatureDescription"
+              :name => "New FeatureDescription",
+              :description => "New Descrition for FeatureDescription"
             }
           end
 
@@ -174,7 +177,8 @@ describe FeatureDescriptionsController do
         describe "success" do
           before(:each) do
             @attr = {
-              :name => "Changed Feature Description Name"
+              :name => "Changed Feature Description Name",
+              :description => "Changed FeatureDescription Description"
             }
             put :update, :id => @feature_description, :feature_description => @attr
           end
@@ -182,6 +186,7 @@ describe FeatureDescriptionsController do
           it "should change the features attributes" do
             @feature_description.reload
             @feature_description.name.should == @attr[:name]
+            @feature_description.description.should == @attr[:description]
           end
 
           it "should redirect to the feature show page" do
@@ -254,7 +259,11 @@ describe FeatureDescriptionsController do
         end
 
         it "should have the right title" do
-          response.should have_selector('a', :content => @feature_description.name)
+          response.should have_selector('h1', :content => @feature_description.name)
+        end
+
+        it "should have the right description" do
+          response.should have_selector('div', :content => @feature_description.description)
         end
 
         it "should not have a new link" do

@@ -24,7 +24,7 @@ class FeatureDescriptionsController < ApplicationController
       redirect_to root_path
     else
       @title = t(:title_feature_description_new)
-      @feature_descriptions = Feature.all
+      @feature_descriptions = FeatureDescription.all
       render 'new'
     end
   end

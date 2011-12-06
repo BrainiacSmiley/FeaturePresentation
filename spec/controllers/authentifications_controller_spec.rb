@@ -47,7 +47,7 @@ describe AuthentificationsController do
     describe "valid signin" do
       before(:each) do
         @attr = {
-          :name => "admin",
+          :login => "admin",
           :password => "test123"
         }
         post :create, :authentification => @attr
