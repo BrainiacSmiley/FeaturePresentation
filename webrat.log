@@ -3425,3 +3425,13 @@ REQUESTING PAGE: GET /login with {} and HTTP headers {}
 REQUESTING PAGE: POST /authentifications with {"utf8"=>"✓", "authentification"=>{"login"=>"admin", "password"=>"test123"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
 REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/authentifications"}
 REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+REQUESTING PAGE: GET /login with {} and HTTP headers {}
+REQUESTING PAGE: POST /authentifications with {"utf8"=>"✓", "authentification"=>{"login"=>"admin", "password"=>"test123"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/authentifications"}
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+REQUESTING PAGE: GET /login with {} and HTTP headers {}
+REQUESTING PAGE: POST /authentifications with {"utf8"=>"✓", "authentification"=>{"login"=>"admin", "password"=>"test123"}} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/authentifications"}
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
