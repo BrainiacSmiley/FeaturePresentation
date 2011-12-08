@@ -7,22 +7,17 @@
     <%= render 'layouts/ipad' %>
   </head>
   <body>
-    <div class="container-fluid">
-      <%= render 'layouts/header' %>
-      <div class="sidebar" id="feaure_list">
-        <div class="section round">
-          <%= render 'feature_descriptions/feature_descriptions' %>
-        </div>
-      </div>
-      <div class="content" id="feature_content">
-        <div class="section round">
+    <%= render 'layouts/header' %>
+    <div class="container span19">
+      <div class="content">
+        <div class="page-header">
           <% flash.each do |key, value| %>
             <%= content_tag(:div, value, :class => "alert-message #{key}") %>
           <% end %>
-          <%= yield %>
+            <%= yield %>
+          </div>
         </div>
       </div>
     </div>
   </body>
 </html>
-

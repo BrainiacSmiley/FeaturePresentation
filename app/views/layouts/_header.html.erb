@@ -1,14 +1,44 @@
 <div class="topbar">
   <div class="topbar-inner">
     <div class="container-fluid">
-      <%= link_to t(:title), root_path , :class => "brand" %>
-      <p class="pull-right">
+      <ul class="nav">
+      <li><%= link_to t(:title), root_path , :class => "brand" %></li>
+      <li class="dropdown" data-dropdown="dropdown" >
+        <a href="#" class="dropdown-toggle" style="color: white;"><%= t(:title_feature_description_list) %></a>
+        <ul class="dropdown-menu">
+          <% @feature_descriptions.each do |feature_description| %>
+            <%= render 'feature_descriptions/feature_description_nav', :feature_description => feature_description %>
+          <% end %>
+        </ul>
+      </li>
+      </ul>
+      
+      <ul class="nav secondary-nav">
         <% if signed_in? %>
-          <%= link_to t('link_logout'), '/logout', :style => "color: white;" %>
+          <li><%= link_to t('link_admin'), '#', :style => "color: white;" %></li>
+          <li><%= link_to t('link_logout'), '/logout', :style => "color: white;" %></li>
         <% else %>
-          <%= link_to t('link_login'), '/login', :style => "color: white;" %>
+          <li><%= link_to t('link_login'), '/login', :style => "color: white;" %></li>
         <% end %>
-      </p>
+      </ul>
+      <% unless @feature_description.nil? %>
+        <% unless @feature_description.description.nil? %>
+          <ul class="nav secondary-nav">
+            <li><a href="#" rel="popover" data-content="<%= @feature_description.description %>" data-original-title="<%= @feature_description.name %>" style="color:white"><%= t(:link_feature_description_description)%></a></li>
+            <script>
+              $(function () {
+                $("a[rel=popover]")
+                  .popover({
+                    offset: 10
+                  })
+                  .click(function(e) {
+                    e.preventDefault()
+                  })
+              })
+            </script>
+          </ul>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
