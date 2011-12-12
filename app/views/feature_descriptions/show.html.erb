@@ -3,7 +3,7 @@
 </div>
 
 <script>
-  var $allTabs
+    var $allTabs
   var $activeTab
   var $allNavTabs
   var activeTabIndex
@@ -72,8 +72,13 @@
         .click(function(e) {
           e.preventDefault()
         })
+      //adding the gestures
+      $('body').touchwipe({
+        wipeLeft: function(){ featureBrowsing(-1) },
+        wipeRight: function(){ featureBrowsing(1) }
+      })
     })
-    
+
     getValues()
     restoreTabFromHash()
 
@@ -88,10 +93,5 @@
     });
     $(".clickable").siblings(".box").hide()
 
-    //adding the gestures
-    $('body').touchwipe({
-      wipeLeft: function(){ featureBrowsing(-1) },
-      wipeRight: function(){ featureBrowsing(1) }
-    })
   });
 </script>

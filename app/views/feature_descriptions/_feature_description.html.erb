@@ -1,11 +1,5 @@
 <tr>
-  <td class="round feature_links">
-    <%= link_to feature_description.name, feature_description_path(feature_description) %><br />
-    <% if signed_in? %>
-    <div class="administration">
-      <button class="btn"><%= link_to t(:link_feature_description_edit), edit_feature_description_path(feature_description) %></button>
-      <button class="btn"><%= link_to t(:link_feature_description_delete), feature_description, :method => :delete, :confirm => t(:delete_question), :title => "Delete #{feature_description.name}" %></button>
-    </div>
-    <% end %>
-  </td>
+  <td><%= feature_description.name %></td>
+  <td><button class="btn"><%= link_to t(:link_feature_description_edit), edit_feature_description_path(feature_description) %></button></td>
+  <td><button class="btn"><%= link_to t(:link_feature_description_delete), feature_description, :method => :delete, :confirm => t(:delete_question), :title => "Delete #{feature_description.name}" %></button></td>
 </tr>

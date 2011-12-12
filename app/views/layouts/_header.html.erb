@@ -11,26 +11,31 @@
           <% end %>
         </ul>
       </li>
-      <% if !@feature_description.nil? %>
-        <li><%= link_to @feature_description.name, feature_description_path(@feature_description) , :class => "brand", :style => "margin-left:60px;"%></li>
+      <% if !@feature_description.nil? && @title != t(:title_feature_description_new) %>
+        <% unless @feature_description.description.nil? %>
+          <% if @feature_description.description.empty? %>
+            <li><%= link_to @feature_description.name, feature_description_path(@feature_description) , :class => "brand", :style => "margin-left:60px;" %></li>
+          <% else %>
+            <li><a href="#" rel="popover" data-placement="below" data-content="<%= @feature_description.description %>" data-original-title="<%= @feature_description.name %>" class="brand" style="margin-left:60px;"><%= @feature_description.name %></a></li>
+          <% end %>
+        <% end %>
       <% end %>
       </ul>
 
       <ul class="nav secondary-nav">
         <% if signed_in? %>
-          <li><%= link_to t('link_admin'), '#', :style => "color: white;" %></li>
+          <li class="dropdown" data-dropdown="dropdown" >
+            <a href="#" class="dropdown-toggle" style="color: white;"><%= t(:link_admin) %></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t('link_feature_description_new'), new_feature_description_path %></li>
+              <li><%= link_to t('link_feature_description_all'), feature_descriptions_path %></li>
+            </ul>
+          </li>
           <li><%= link_to t('link_logout'), '/logout', :style => "color: white;" %></li>
         <% else %>
           <li><%= link_to t('link_login'), '/login', :style => "color: white;" %></li>
         <% end %>
       </ul>
-      <% unless @feature_description.nil? %>
-        <% unless @feature_description.description.empty? %>
-          <ul class="nav secondary-nav">
-            <li><a href="#" rel="popover" data-placement="below" data-content="<%= @feature_description.description %>" data-original-title="<%= @feature_description.name %>" style="color:white"><%= t(:link_feature_description_description)%></a></li>
-          </ul>
-        <% end %>
-      <% end %>
     </div>
   </div>
 </div>

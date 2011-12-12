@@ -1,7 +1,7 @@
 FeaturePresentation::Application.routes.draw do
 
   resources :features,             :only => [:new, :create, :edit, :update, :destroy, :show]
-  resources :feature_descriptions, :only => [:new, :create, :edit, :update, :destroy, :show]
+  resources :feature_descriptions, :only => [:index, :new, :create, :edit, :update, :destroy, :show]
   resources :authentifications,    :only => [:new, :create, :destroy]
   
   root             :to => 'pages#home'

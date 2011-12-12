@@ -233,7 +233,7 @@ describe FeatureDescriptionsController do
       end
     end
 
-    describe "GET 'show" do
+    describe "GET 'show'" do
       before(:each) do
         @feature_description = Factory(:feature_description)
         @feature1 = Factory(
@@ -259,11 +259,7 @@ describe FeatureDescriptionsController do
         end
 
         it "should have the right title" do
-          response.should have_selector('h1', :content => @feature_description.name)
-        end
-
-        it "should have the right description" do
-          response.should have_selector('div', :content => @feature_description.description)
+          response.should have_selector('a', :content => @feature_description.name)
         end
 
         it "should not have a new link" do
@@ -273,7 +269,7 @@ describe FeatureDescriptionsController do
         describe "feature list" do
           it "should contain every element of the feature list" do
             @features.each do |feature|
-              response.should have_selector('h1', :content => feature.name)
+              response.should have_selector('a', :content => feature.name)
             end
           end
 
@@ -312,6 +308,69 @@ describe FeatureDescriptionsController do
             @features.each do |feature|
               response.should have_selector('a', :href => feature_path(feature), :content => I18n.t(:link_feature_delete))
             end
+          end
+        end
+      end
+    end
+
+    describe "GET 'index'" do
+      before(:each) do
+        @feature_description = Factory(:feature_description)
+        @feature_description2 = Factory(:feature_description, :name => "Feature Description 2")
+        @feature_description3 = Factory(:feature_description, :name => "Feature Description 3")
+        @feature_descriptions = [@feature_description, @feature_description2, @feature_description3]
+      end
+
+      describe "as not loged in" do
+        before(:each) do
+          get :index
+        end
+
+        it "should redirect to login" do
+          response.should redirect_to '/login'
+        end
+      end
+
+      describe "as loged in" do
+        before(:each) do
+          test_sign_in
+          get :index
+        end
+
+        it "should be success" do
+          response.should be_success
+        end
+
+        it "should have the right title" do
+          response.should have_selector('title', :content => I18n.t(:title_feature_description_all))
+        end
+
+        it "should have a entry for every feature desription" do
+          @feature_descriptions.each do |feature_description|
+            response.should have_selector(
+              'a',
+              :content => feature_description.name
+            )
+          end
+        end
+
+        it "should have a edit button for every feature desription" do
+          @feature_descriptions.each do |feature_description|
+            response.should have_selector(
+              'a',
+              :content => I18n.t(:link_feature_description_edit),
+              :href => edit_feature_description_path(feature_description)
+            )
+          end
+        end
+
+        it "should have a delete button for every feature desription" do
+          @feature_descriptions.each do |feature_description|
+            response.should have_selector(
+              'a',
+              :content => I18n.t(:link_feature_description_delete),
+              :href => feature_description_path(feature_description)
+            )
           end
         end
       end

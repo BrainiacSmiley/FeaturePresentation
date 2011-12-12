@@ -31,7 +31,7 @@ describe PagesController do
         it "should contain an entry for every feature description" do
           @feature_descriptions.each do |feature_description|
             response.should have_selector(
-              'td',
+              'a',
               :content => feature_description.name
             )
           end
@@ -51,26 +51,6 @@ describe PagesController do
             get :home
           end
           
-          it "should not contain a edit link for every feature" do
-            @feature_descriptions.each do |feature_description|
-              response.should_not have_selector(
-                'a',
-                :href => edit_feature_description_path(feature_description),
-                :content => I18n.t(:link_feature_description_edit)
-              )
-            end
-          end
-
-          it "should not contain a delete link" do
-            @feature_descriptions.each do |feature_description|
-              response.should_not have_selector(
-                'a',
-                :href => feature_description_path(feature_description),
-                :content => I18n.t(:link_feature_description_delete)
-              )
-            end
-          end
-
           it "should not contain a add new feature link" do
             response.should_not have_selector(
               'a',
@@ -84,25 +64,6 @@ describe PagesController do
           before(:each) do
             test_sign_in
             get :home
-          end
-
-          it "should contain a edit link for every feature" do
-            @feature_descriptions.each do |feature_description|
-              response.should have_selector(
-                'a',
-                :href => edit_feature_description_path(feature_description),
-                :content => I18n.t(:link_feature_description_edit)
-              )
-            end
-          end
-
-          it "should contain a delete link" do
-            @feature_descriptions.each do |feature_description|
-              response.should have_selector('a',
-                :href => feature_description_path(feature_description),
-                :content => I18n.t(:link_feature_description_delete)
-              )
-            end
           end
 
           it "should contain a add new feature link" do

@@ -1,7 +1,7 @@
 <% tabs.each_with_index do |tab, index| %>
   <% if index == 0 %>
-  <li class="active"><a href="#<%= tab.id %>"><%= tab.name%></a></li>
+    <li class="active"><a href="#<%= tab.id %>"><%= tab.name%></a></li>
   <% else %>
-  <li><a href="#<%= tab.id %>"><%= tab.name%></a></li>
+    <li><a href="#<%= tab.id %>"><%= tab.name%></a></li>
   <% end %>
 <% end %>

@@ -1,5 +1,10 @@
 class FeatureDescriptionsController < ApplicationController
-  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :authenticate, :only => [:index, :new, :create, :edit, :update, :destroy]
+
+  def index
+    @title = t(:title_feature_description_all)
+    @feature_descriptions = FeatureDescription.all
+  end
 
   def show
     set_current_feature_description(params[:id])

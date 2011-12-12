@@ -35,6 +35,7 @@ group :test do
   # Pretty printed test output
   gem 'turn', '~> 0.8.3', :require => false
   gem 'rspec-rails'
+  gem 'rspec-html-matchers'
   gem 'webrat'
   gem 'spork'
   gem 'factory_girl_rails'
