@@ -3,17 +3,6 @@ body {
   background: #58585a;
 }
 
-.section {
-  margin-top: 1em;
-  font-size: 120%;
-  padding: 20px;
-  background: #c8c9ca;
-}
-
-.section h1 {
-  font-size: 120%;
-}
-
 /* Links */
 
 a {
@@ -48,7 +37,6 @@ a:visited {
   .content {
     background-color: #fff;
     padding: 20px;
-    margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
     -webkit-border-radius: 0 0 6px 6px;
        -moz-border-radius: 0 0 6px 6px;
             border-radius: 0 0 6px 6px;

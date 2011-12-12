@@ -7,6 +7,7 @@ class FeatureDescriptionsController < ApplicationController
     @title = @feature_description.name
     @feature_descriptions = FeatureDescription.all
     @features = @feature_description.features
+    @features_display = true
   end
 
   def new

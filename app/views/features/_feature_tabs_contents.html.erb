@@ -4,18 +4,13 @@
   <% else %>
     <div class="tab-pane" id="<%= content.id %>">
   <% end %>
-    <div class="row">
-      <button class="btn" style="float: left; margin-left: 20px;" onClick="featureBrowsing(-1);"><</button>
-      <h1 style="float: left; width: 85%;"><center><%= content.name %></center></h1>
-      <button class="btn" style="float: right;" onClick="featureBrowsing(1);">></button>
-    </div>
 
     <% unless content.example.empty? %>
-    <div class="round example"><%= raw content.example %></div>
+    <div class="round example span15"><%= raw content.example %></div>
     <% end %>
 
     <h3><%= t(:feature_description) %></h3>
-    <div class="round description">
+    <div class="round description span15">
       <%= raw content.description %>
     </div>
     &nbsp;

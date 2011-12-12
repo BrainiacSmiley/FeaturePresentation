@@ -8,12 +8,27 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <div class="container span19">
+    <div class="container span16">
       <div class="content">
         <div class="page-header">
           <% flash.each do |key, value| %>
             <%= content_tag(:div, value, :class => "alert-message #{key}") %>
           <% end %>
+          <% if !@features_display.nil? %>
+            <ul class="tabs">
+              <button class="btn" style="float:left; margin-left:5px; margin-top:5px;" onClick="featureBrowsing(-1);"><</button>
+              <%= render 'features/feature_tabs', :tabs => @features %>
+              <% unless !signed_in? %>
+                <button class="btn" style="float:right; margin-top:5px; margin-right:5px;"><%= link_to t(:link_feature_new), new_feature_path %></button>
+              <% end %>
+              <button class="btn" style="float:right; margin-top:5px; margin-right:5px;" onClick="featureBrowsing(1);">></button>
+            </ul>
+          <% else %>
+            <h1><%= @title %></h1>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="span16">
             <%= yield %>
           </div>
         </div>

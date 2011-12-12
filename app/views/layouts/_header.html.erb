@@ -11,8 +11,11 @@
           <% end %>
         </ul>
       </li>
+      <% if !@feature_description.nil? %>
+        <li><%= link_to @feature_description.name, feature_description_path(@feature_description) , :class => "brand", :style => "margin-left:60px;"%></li>
+      <% end %>
       </ul>
-      
+
       <ul class="nav secondary-nav">
         <% if signed_in? %>
           <li><%= link_to t('link_admin'), '#', :style => "color: white;" %></li>
@@ -22,20 +25,9 @@
         <% end %>
       </ul>
       <% unless @feature_description.nil? %>
-        <% unless @feature_description.description.nil? %>
+        <% unless @feature_description.description.empty? %>
           <ul class="nav secondary-nav">
-            <li><a href="#" rel="popover" data-content="<%= @feature_description.description %>" data-original-title="<%= @feature_description.name %>" style="color:white"><%= t(:link_feature_description_description)%></a></li>
-            <script>
-              $(function () {
-                $("a[rel=popover]")
-                  .popover({
-                    offset: 10
-                  })
-                  .click(function(e) {
-                    e.preventDefault()
-                  })
-              })
-            </script>
+            <li><a href="#" rel="popover" data-placement="below" data-content="<%= @feature_description.description %>" data-original-title="<%= @feature_description.name %>" style="color:white"><%= t(:link_feature_description_description)%></a></li>
           </ul>
         <% end %>
       <% end %>
